@@ -7,9 +7,12 @@
     tools:context=".MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_main"
         android:background="@color/black"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        tools:listitem="@layout/movie_item"
+        tools:itemCount="5"
          />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
