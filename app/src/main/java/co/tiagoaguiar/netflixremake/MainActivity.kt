@@ -1,12 +1,11 @@
 package co.tiagoaguiar.netflixremake
 
 import android.os.Bundle
-import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import co.tiagoaguiar.netflixremake.adapter.MainAdapter
+import co.tiagoaguiar.netflixremake.adapter.CategoryAdapter
+import co.tiagoaguiar.netflixremake.model.Category
 import co.tiagoaguiar.netflixremake.model.Movie
 
 class MainActivity : AppCompatActivity() {
@@ -16,16 +15,23 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val movieList = mutableListOf<Movie>()
-        for (i in 0 until 50) {
-            val movie = Movie(R.drawable.movie)
-            movieList.add(movie)
+        val categories = mutableListOf<Category>()
+        for (j in 0 until 10){
+            val movies = mutableListOf<Movie>()
+            for (i in 0 until 10) {
+                val movie = Movie(R.drawable.movie)
+                movies.add(movie)
+            }
+            val category = Category("Cat $j", movies)
+            categories.add(category)
         }
 
-        val adapter = MainAdapter(movieList)
-        val rvMain: RecyclerView = findViewById(R.id.rv_main)
-        rvMain.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
-        rvMain.adapter = adapter
+
+
+        val adapter = CategoryAdapter(categories)
+        val rvMovie: RecyclerView = findViewById(R.id.rv_main)
+        rvMovie.layoutManager = LinearLayoutManager(this)
+        rvMovie.adapter = adapter
     }
 
 
