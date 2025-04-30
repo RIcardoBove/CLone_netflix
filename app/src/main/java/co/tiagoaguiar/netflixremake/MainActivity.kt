@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import co.tiagoaguiar.netflixremake.adapter.CategoryAdapter
 import co.tiagoaguiar.netflixremake.model.Category
 import co.tiagoaguiar.netflixremake.model.Movie
+import co.tiagoaguiar.netflixremake.util.CategoryTask
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,16 +16,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val categories = mutableListOf<Category>()
-        for (j in 0 until 10){
-            val movies = mutableListOf<Movie>()
-            for (i in 0 until 10) {
-                val movie = Movie(R.drawable.movie)
-                movies.add(movie)
-            }
-            val category = Category("Cat $j", movies)
-            categories.add(category)
-        }
+       val categories = mutableListOf<Category>()
 
 
 
@@ -32,6 +24,8 @@ class MainActivity : AppCompatActivity() {
         val rvMovie: RecyclerView = findViewById(R.id.rv_main)
         rvMovie.layoutManager = LinearLayoutManager(this)
         rvMovie.adapter = adapter
+
+        CategoryTask().execute("https://api.tiagoaguiar.co/netflixapp/home?apiKey=281aa89d-c2fb-4c58-970b-d14195a474e1")
     }
 
 

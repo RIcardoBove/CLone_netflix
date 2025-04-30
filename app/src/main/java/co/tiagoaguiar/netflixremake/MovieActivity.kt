@@ -26,10 +26,7 @@ class MovieActivity : AppCompatActivity() {
 
         val movies = mutableListOf<Movie>()
 
-        for (i in 0 until 10) {
-            val movie = Movie(R.drawable.movie)
-            movies.add(movie)
-        }
+
 
         rvSimilar.layoutManager = GridLayoutManager(this, 3)
         rvSimilar.adapter = MovieAdapter(movies, R.layout.movie_item_similar)
@@ -43,6 +40,7 @@ class MovieActivity : AppCompatActivity() {
 
         supportActionBar?.setHomeAsUpIndicator(R.drawable.baseline_arrow_back_24)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = null
 
         //Busquei o desenhavel (layer-list)
         val layerDrawable: LayerDrawable = ContextCompat.getDrawable(this, R.drawable.shadows) as LayerDrawable
