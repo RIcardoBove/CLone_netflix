@@ -1,7 +1,7 @@
 package co.tiagoaguiar.netflixremake
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import co.tiagoaguiar.netflixremake.adapter.CategoryAdapter
 import co.tiagoaguiar.netflixremake.model.Category
-import co.tiagoaguiar.netflixremake.model.Movie
 import co.tiagoaguiar.netflixremake.util.CategoryTask
 
 class MainActivity : AppCompatActivity(), CategoryTask.Callback {
@@ -26,7 +25,12 @@ class MainActivity : AppCompatActivity(), CategoryTask.Callback {
 
         progressBar = findViewById(R.id.progress_main)
 
-        adapter = CategoryAdapter(categories)
+        adapter = CategoryAdapter(categories) {
+            val intent = Intent(this@MainActivity, MovieActivity::class.java)
+            intent.putExtra("id", it)
+            startActivity(intent)
+        }
+
         val rvMovie: RecyclerView = findViewById(R.id.rv_main)
         rvMovie.layoutManager = LinearLayoutManager(this)
         rvMovie.adapter = adapter
@@ -43,8 +47,8 @@ class MainActivity : AppCompatActivity(), CategoryTask.Callback {
         this.categories.clear()
         this.categories.addAll(categories)
         adapter.notifyDataSetChanged()
-
         progressBar.visibility = View.GONE
+
     }
 
     override fun onFailure(message: String) {
